@@ -5,6 +5,8 @@ import torch
 import os
 from datetime import datetime
 from model import DistMult
+import torch.optim as optim
+import torch.nn.functional as F
 
 def parsing_args():
     parser = argparse.ArgumentParser(
@@ -63,26 +65,34 @@ def main(args):
     test_triples = read_triple(os.path.join(data_path, 'test.txt'), entity2id, relation2id)
     all_triples = train_triples + valid_triples + test_triples
 
-    train_dataset = DataLoader(TrainDataset(train_triples, nentity),
-                               shuffle=True,
-                               batch_size=500,
-                               collate_fn=TrainDataset.collate_fn
-                               )
-    valid_dataset = DataLoader(TestDataset(train_triples,  all_triples, nentity),
-                               shuffle=True,
+    train_dataloader = DataLoader(TrainDataset(train_triples, nentity),
+                                  shuffle=True,
+                                  drop_last=True,
+                                  batch_size=500,
+                                  collate_fn=TrainDataset.collate_fn
+                                  )
+    valid_dataloader = DataLoader(TestDataset(train_triples,  all_triples, nentity),
+                               shuffle=False,
                                batch_size=500,
                                collate_fn=TestDataset.collate_fn
                                )
     test_dataset = DataLoader(TestDataset(test_triples, all_triples, nentity),
-                               shuffle=True,
+                               shuffle=False,
                                batch_size=500,
                                collate_fn=TestDataset.collate_fn
                                )
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    for i in train_dataset:
-        print(i)
-    # model = DistMult(nentity, nrelation, args.hidden_dim)
-    # model.to(device)
+
+    model = DistMult(nentity, nrelation, 500)
+    model.to(device)
+    optimizer = optim.Adam(model.parameters(), lr=0.001)
+    model.train()
+    running_loss = 0.0
+    for positive_sample, negative_heads, negative_tails in train_dataloader:
+        model.forward((positive_sample, (negative_heads, negative_tails)))
+
+
+    # lose = F.margin_ranking_loss()
 
 if __name__ == '__main__':
     args = parsing_args()
