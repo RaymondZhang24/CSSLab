@@ -1,7 +1,11 @@
-from torch.utils.data import DataLoader, Dataset
-import torch
-import numpy as np
+#!/usr/bin/python3
 
+from __future__ import absolute_import
+from __future__ import division
+from __future__ import print_function
+
+import torch
+from torch.utils.data import Dataset
 
 class TrainDataset(Dataset):
     def __init__(self, raw_triples, nentity, negative_size=256):
@@ -10,26 +14,10 @@ class TrainDataset(Dataset):
         self.tail_entities = set()
         self.negative_size = negative_size
         self.nentity = nentity
-        self.true_head, self.true_tails = self.__get_true_head(raw_triples)
+        self.true_head, self.true_tails = self.__get_true_head(self.raw_triples)
 
     def __len__(self):
         return len(self.raw_triples)
-
-    def __get_true_head(self, triples):
-        true_head = {}
-        true_tail = {}
-        for head, relation, tail in triples:
-            if (head, relation) not in true_tail:
-                true_tail[(head, relation)] = set()
-            true_tail[(head, relation)].add(tail)
-
-            if (relation, tail) not in true_head:
-                true_head[(relation, tail)] = set()
-            true_head[(relation, tail)].add(head)
-            self.head_entities.add(head)
-            self.tail_entities.add(tail)
-
-        return true_head, true_tail
 
     def __getitem__(self, index):
 
@@ -65,24 +53,44 @@ class TrainDataset(Dataset):
 
         return positive_sample, negative_heads, negative_tails
 
+    def __get_true_head(self, triples):
+        true_head = {}
+        true_tail = {}
+        for head, relation, tail in triples:
+            if (head, relation) not in true_tail:
+                true_tail[(head, relation)] = set()
+            true_tail[(head, relation)].add(tail)
+
+            if (relation, tail) not in true_head:
+                true_head[(relation, tail)] = set()
+            true_head[(relation, tail)].add(head)
+            self.head_entities.add(head)
+            self.tail_entities.add(tail)
+
+        return true_head, true_tail
+
 
 class TestDataset(Dataset):
-    def __init__(self, test_triples, all_triples, nentity):
-        self.test_triples = test_triples
-        self.all_triples = set(all_triples)
+    def __init__(self, triples, all_true_triples, nentity):
+        self.len = len(triples)
+        self.triple_set = set(all_true_triples)
+        self.triples = triples
         self.nentity = nentity
 
     def __len__(self):
-        return len(self.test_triples)
+        return self.len
 
     def __getitem__(self, idx):
-        triples = self.test_triples[idx]
-        head = [(0, rand_head) if triples not in self.all_triples
+        triples = self.triples[idx]
+
+        head = [(0, rand_head) if (rand_head, triples[1], triples[2]) not in self.triple_set
                 else (-1, triples[0]) for rand_head in range(self.nentity)]
+
         head[triples[0]] = (0, triples[0])
 
-        tails = [(0, rand_trails) if triples not in self.all_triples
+        tails = [(0, rand_trails) if (triples[0], triples[1], rand_trails) not in self.triple_set
                  else (-1, triples[2]) for rand_trails in range(self.nentity)]
+
         tails[triples[2]] = (0, triples[2])
 
         triples = torch.LongTensor(triples)
@@ -97,7 +105,6 @@ class TestDataset(Dataset):
         tails_negative_sample = tails[:, 1]
 
         return triples, head_negative_sample, tails_negative_sample, head_filter_bias, tails_filter_bias
-
     @staticmethod
     def collate_fn(data):
         positive_sample = torch.stack([_[0] for _ in data], dim=0)
