@@ -1,0 +1,97 @@
+2024-05-31 20:44:18 INFO     Model: DistMult
+2024-05-31 20:44:18 INFO     Data Path: data/FB15k-237
+2024-05-31 20:44:18 INFO     #entity: 14541
+2024-05-31 20:44:18 INFO     #relation: 237
+2024-05-31 20:44:18 INFO     #train: 272115
+2024-05-31 20:44:18 INFO     #valid: 17535
+2024-05-31 20:44:19 INFO     #test: 20466
+2024-05-31 20:44:20 INFO     cuda
+2024-05-31 20:44:20 INFO     Model Parameter Configuration:
+2024-05-31 20:44:20 INFO     Parameter entity_embedding.weight: torch.Size([14541, 500]), require_grad = True
+2024-05-31 20:44:20 INFO     Parameter relation_embedding.weight: torch.Size([237, 500]), require_grad = True
+2024-05-31 20:44:22 INFO     Ramdomly Initializing DistMult Model...
+2024-05-31 20:44:22 INFO     Start Training...
+2024-05-31 20:44:22 INFO     init_step = 0
+2024-05-31 20:44:22 INFO     batch_size = 1024
+2024-05-31 20:44:22 INFO     negative_adversarial_sampling = 1
+2024-05-31 20:44:22 INFO     hidden_dim = 500
+2024-05-31 20:44:22 INFO     gamma = 200.000000
+2024-05-31 20:44:22 INFO     negative_adversarial_sampling = True
+2024-05-31 20:44:22 INFO     adversarial_temperature = 1.000000
+2024-05-31 20:44:22 INFO     learning_rate = 0
+2024-05-31 20:44:33 INFO     Training average regularization at step 0: 0.000363
+2024-05-31 20:44:33 INFO     Training average positive_sample_loss at step 0: 0.693147
+2024-05-31 20:44:33 INFO     Training average head_sample_loss at step 0: 0.693147
+2024-05-31 20:44:33 INFO     Training average tail_sample_loss at step 0: 0.693147
+2024-05-31 20:44:33 INFO     Training average loss at step 0: 0.693510
+2024-05-31 20:44:33 INFO     Evaluating on Valid Dataset...
+2024-05-31 20:44:34 INFO     Evaluating the model... (0/1096)
+2024-05-31 20:45:56 INFO     Evaluating the model... (1000/1096)
+2024-05-31 20:46:04 INFO     Valid MRR at step 0: 0.000850
+2024-05-31 20:46:04 INFO     Valid H_HITS@10 at step 0: 0.001141
+2024-05-31 20:46:04 INFO     Valid T_HITS@10 at step 0: 0.001255
+2024-05-31 20:59:53 INFO     Training average regularization at step 100: 0.000115
+2024-05-31 20:59:53 INFO     Training average positive_sample_loss at step 100: 0.693044
+2024-05-31 20:59:53 INFO     Training average head_sample_loss at step 100: 0.693146
+2024-05-31 20:59:53 INFO     Training average tail_sample_loss at step 100: 0.693147
+2024-05-31 20:59:53 INFO     Training average loss at step 100: 0.693210
+2024-05-31 21:06:39 INFO     Evaluating on Valid Dataset...
+2024-05-31 21:06:40 INFO     Evaluating the model... (0/1096)
+2024-05-31 21:08:02 INFO     Evaluating the model... (1000/1096)
+2024-05-31 21:08:09 INFO     Valid MRR at step 150: 0.186725
+2024-05-31 21:08:09 INFO     Valid H_HITS@10 at step 150: 0.166923
+2024-05-31 21:08:09 INFO     Valid T_HITS@10 at step 150: 0.409125
+2024-05-31 21:15:13 INFO     Training average regularization at step 200: 0.001194
+2024-05-31 21:15:13 INFO     Training average positive_sample_loss at step 200: 0.674401
+2024-05-31 21:15:13 INFO     Training average head_sample_loss at step 200: 0.692389
+2024-05-31 21:15:13 INFO     Training average tail_sample_loss at step 200: 0.692858
+2024-05-31 21:15:13 INFO     Training average loss at step 200: 0.684706
+2024-05-31 21:29:20 INFO     Training average regularization at step 300: 0.018809
+2024-05-31 21:29:20 INFO     Training average positive_sample_loss at step 300: 0.476845
+2024-05-31 21:29:20 INFO     Training average head_sample_loss at step 300: 0.697238
+2024-05-31 21:29:20 INFO     Training average tail_sample_loss at step 300: 0.692989
+2024-05-31 21:29:20 INFO     Training average loss at step 300: 0.604788
+2024-05-31 21:29:20 INFO     Evaluating on Valid Dataset...
+2024-05-31 21:29:21 INFO     Evaluating the model... (0/1096)
+2024-05-31 21:30:42 INFO     Evaluating the model... (1000/1096)
+2024-05-31 21:30:50 INFO     Valid MRR at step 300: 0.203979
+2024-05-31 21:30:50 INFO     Valid H_HITS@10 at step 300: 0.192529
+2024-05-31 21:30:50 INFO     Valid T_HITS@10 at step 300: 0.437639
+2024-05-31 21:44:47 INFO     Training average regularization at step 400: 0.049993
+2024-05-31 21:44:47 INFO     Training average positive_sample_loss at step 400: 0.277703
+2024-05-31 21:44:47 INFO     Training average head_sample_loss at step 400: 0.701618
+2024-05-31 21:44:47 INFO     Training average tail_sample_loss at step 400: 0.688963
+2024-05-31 21:44:47 INFO     Training average loss at step 400: 0.536490
+2024-05-31 21:51:57 INFO     Evaluating on Valid Dataset...
+2024-05-31 21:51:58 INFO     Evaluating the model... (0/1096)
+2024-05-31 21:53:20 INFO     Evaluating the model... (1000/1096)
+2024-05-31 21:53:28 INFO     Valid MRR at step 450: 0.213287
+2024-05-31 21:53:28 INFO     Valid H_HITS@10 at step 450: 0.219447
+2024-05-31 21:53:28 INFO     Valid T_HITS@10 at step 450: 0.452409
+2024-05-31 22:00:30 INFO     Training average regularization at step 500: 0.073607
+2024-05-31 22:00:30 INFO     Training average positive_sample_loss at step 500: 0.228465
+2024-05-31 22:00:30 INFO     Training average head_sample_loss at step 500: 0.643140
+2024-05-31 22:00:30 INFO     Training average tail_sample_loss at step 500: 0.637191
+2024-05-31 22:00:30 INFO     Training average loss at step 500: 0.507923
+2024-05-31 22:14:35 INFO     Training average regularization at step 600: 0.099694
+2024-05-31 22:14:35 INFO     Training average positive_sample_loss at step 600: 0.220958
+2024-05-31 22:14:35 INFO     Training average head_sample_loss at step 600: 0.550829
+2024-05-31 22:14:35 INFO     Training average tail_sample_loss at step 600: 0.544199
+2024-05-31 22:14:35 INFO     Training average loss at step 600: 0.483930
+2024-05-31 22:14:35 INFO     Evaluating on Valid Dataset...
+2024-05-31 22:14:37 INFO     Evaluating the model... (0/1096)
+2024-05-31 22:15:58 INFO     Evaluating the model... (1000/1096)
+2024-05-31 22:16:06 INFO     Valid MRR at step 600: 0.211724
+2024-05-31 22:16:06 INFO     Valid H_HITS@10 at step 600: 0.224693
+2024-05-31 22:16:06 INFO     Valid T_HITS@10 at step 600: 0.452866
+2024-05-31 22:29:55 INFO     Training average regularization at step 700: 0.121417
+2024-05-31 22:29:55 INFO     Training average positive_sample_loss at step 700: 0.213915
+2024-05-31 22:29:55 INFO     Training average head_sample_loss at step 700: 0.485091
+2024-05-31 22:29:55 INFO     Training average tail_sample_loss at step 700: 0.472078
+2024-05-31 22:29:55 INFO     Training average loss at step 700: 0.467667
+2024-05-31 22:36:49 INFO     Evaluating on Valid Dataset...
+2024-05-31 22:36:50 INFO     Evaluating the model... (0/1096)
+2024-05-31 22:38:12 INFO     Evaluating the model... (1000/1096)
+2024-05-31 22:38:19 INFO     Valid MRR at step 750: 0.212537
+2024-05-31 22:38:19 INFO     Valid H_HITS@10 at step 750: 0.229085
+2024-05-31 22:38:19 INFO     Valid T_HITS@10 at step 750: 0.456230
